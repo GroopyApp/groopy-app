@@ -1,0 +1,45 @@
+@import "../../assets/fundations.css";
+
+.TopicCard {
+    height: var(--huge-spacing);
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--border-color);
+    border-radius: var(--small-spacing);
+    padding: var(--small-spacing);
+    margin-top: var(--normal-spacing);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    background-color: var(--card-color);
+}
+
+.TopicCardImage {
+    width: var(--huge-spacing);
+    height: var(--huge-spacing);
+    margin-right: var(--normal-spacing);
+    border-radius: var(--normal-spacing);
+    object-fit: cover;
+}
+
+.TopicCardContent {
+    flex: 1;
+    text-align: left;
+}
+
+.TopicCardTitle {
+    width: 85%;
+    font-weight: var(--important-font-weight);
+    text-align: left;
+    margin-bottom: var(--medium-spacing);
+}
+
+.TopicCardDescription {
+    text-align: left;
+}
+
+.TopicCardFlag {
+    position: absolute;
+    top: var(--average-spacing);
+    right: var(--small-spacing);
+    font-size: var(--normal-spacing);
+    text-align: center;
+}

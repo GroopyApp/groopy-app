@@ -1,0 +1,20 @@
+.SearchBarContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: var(--normal-spacing);
+    background-color: var(--input-color);
+    border-radius: var(--small-spacing);
+    padding: var(--medium-spacing) var(--small-spacing);
+}
+
+.SearchBarIcon {
+    margin-right: var(--small-spacing);
+}
+
+.SearchBarInput {
+    flex: 1;
+    padding-bottom: var(--tiny-spacing);
+    font-size: var(--average-spacing);
+    color: var(--input-color);
+}

@@ -1,0 +1,35 @@
+.SearchTagsBarContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.SearchTagsBarInputContainer {
+    margin-top: var(--medium-spacing);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: var(--normal-spacing);
+    background-color: var(--input-color);
+    border-radius: var(--small-spacing);
+    padding: var(--medium-spacing) var(--small-spacing);
+}
+
+.SearchTagsBarIcon {
+    margin-right: var(--small-spacing);
+}
+
+.SearchTagsBarInput {
+    width: 100%;
+    padding-bottom: var(--tiny-spacing);
+    font-size: var(--average-spacing);
+    color: var(--input-color);
+}
+
+.SearchTagsBarChips {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    margin-left: var(--small-spacing);
+}
