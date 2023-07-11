@@ -1,5 +1,5 @@
 import React from 'react';
-import Ionicons from "react-native-vector-icons/Ionicons";
+import Icon from 'react-native-vector-icons/Ionicons';
 import './SearchBar.css';
 import {TextInput, View } from "react-native";
 
@@ -11,7 +11,7 @@ const SearchBar = ({ onInputChange }: SearchBarProps) => {
         <View>
             <div className="SearchBarContainer">
                 <span className="SearchBarIcon">
-                    <Ionicons
+                    <Icon
                         name="ios-search"
                         size="var(--normal-spacing)"
                         color="var(--text-color)" />

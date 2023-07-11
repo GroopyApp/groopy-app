@@ -10,11 +10,25 @@ import {
     SubscribeEventRequest, SubscribeEventResponse,
     SubscribeTopicRequest, SubscribeTopicResponse
 } from "../types/rest";
+import SessionService from "./SessionService";
+import {UserSession} from "../context/types";
 
 const GatewayService = {
-    getWall: async (request: WallRequest) => {
-        const response = await apiRequestCall<WallResponseWrapper>({"wallRequest": request});
+    getWall: async (request: WallRequest, token: string) => {
+        const response = await apiRequestCall<WallResponseWrapper>({"wallRequest": request}, token);
         return response["wallResponse"];
+    },
+    login: async (request: SignInRequest) => {
+        const response = await apiAuthCall<SignInResponseWrapper>({"signInRequest": request});
+        const result = response["signInResponse"];
+        await SessionService.storeSession({
+            username: result.data.user_id,
+            email: result.data.email,
+            firstName: result.data.name,
+            lastName: result.data.surname,
+            imageUrl: result.data.photo_url,
+            token: result.token
+        } as UserSession);
     }
 }
 
@@ -23,11 +37,12 @@ const apiRequestCall = async <T>(request: WallRequestWrapper |
                                      CreateTopicRequestWrapper |
                                      SubscribeTopicRequestWrapper |
                                      CreateEventRequestWrapper |
-                                     SubscribeEventRequestWrapper): Promise<T> => {
-    return await apiCall(GATEWAY_CONFIG.requestEndpoint, request,{'x-auth-token': '1234567890'}) as T;
+                                     SubscribeEventRequestWrapper,
+                                 token: string): Promise<T> => {
+    return await apiCall(GATEWAY_CONFIG.requestEndpoint, request,{'x-auth-token': token}) as T;
 }
 
-const apiAuthCall = async <T>(endpoint, request): Promise<T> => {
+const apiAuthCall = async <T>(request): Promise<T> => {
     return await apiCall(GATEWAY_CONFIG.authEndpoint, request) as T;
 }
 

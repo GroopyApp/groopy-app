@@ -1,10 +1,10 @@
-.SearchTagsBarContainer {
+.SearchChipsBarContainer {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    margin-top: var(--medium-spacing);
 }
 
-.SearchTagsBarInputContainer {
+.SearchChipsBarInputContainer {
     margin-top: var(--medium-spacing);
     display: flex;
     flex-direction: row;
@@ -15,21 +15,22 @@
     padding: var(--medium-spacing) var(--small-spacing);
 }
 
-.SearchTagsBarIcon {
+.SearchChipsBarIcon {
     margin-right: var(--small-spacing);
 }
 
-.SearchTagsBarInput {
+.SearchChipsBarInput {
     width: 100%;
     padding-bottom: var(--tiny-spacing);
     font-size: var(--average-spacing);
     color: var(--input-color);
 }
 
-.SearchTagsBarChips {
+.SearchChipsBarChips {
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
+    flex-wrap: wrap;
     margin-left: var(--small-spacing);
 }

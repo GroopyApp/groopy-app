@@ -5,8 +5,8 @@ import GatewayService from "../../services/GatewayService";
 import type { Topic } from "../../types/rest";
 import TopicCard from "../../components/TopicCard/TopicCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import SearchTagsBar from "../../components/SearchTagsBar/SearchTagsBar";
-import {SCREEN_VIEW_STYLES} from "../../configs/constants";
+import SearchChipBar from "../../components/SearchTagsBar/SearchChipsBar";
+import {FIXED_TOP_HEADER_STYLES, SCREEN_VIEW_STYLES, SCROLLABLE_BODY_STYLES} from "../../configs/constants";
 
 export default function SearchScreen() {
 
@@ -66,10 +66,13 @@ export default function SearchScreen() {
 
     return (
         <View style={SCREEN_VIEW_STYLES}>
-            <SearchBar onInputChange={onTextSearch} />
-            <SearchTagsBar onTagsUpdate={formatTags} />
-            {/* Introduce languages filter */}
-            <ScrollView>
+            <View style={FIXED_TOP_HEADER_STYLES}>
+                <SearchBar onInputChange={onTextSearch} />
+                <SearchChipBar onChipsUpdate={formatTags} mode="TAGS" />
+                {/*<SearchChipBar onChipsUpdate={formatTags} mode="LANG" />*/}
+                {/* Introduce languages filter */}
+            </View>
+            <ScrollView style={SCROLLABLE_BODY_STYLES}>
                 {isLoading ? (
                     <ActivityIndicator />
                 ) : (<FlatList

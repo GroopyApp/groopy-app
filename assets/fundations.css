@@ -21,7 +21,10 @@
     --tiny-spacing: 0.2em;
     --small-spacing: 0.4em;
     --medium-spacing: 0.8em;
+    --medium-spacing-plus: 1em;
     --normal-spacing: 1.2em;
     --average-spacing: 1.8em;
+    --big-spacing: 2em;
     --huge-spacing: 6em;
+    --gorgeous-spacing: 9em;
 }

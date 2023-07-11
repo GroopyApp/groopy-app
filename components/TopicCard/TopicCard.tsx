@@ -1,7 +1,7 @@
 import React from 'react';
 import './TopicCard.css';
 import type { Topic } from '../../types/rest';
-import Ionicons from "react-native-vector-icons/Ionicons";
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Text, View} from "react-native";
 import {Chip} from "@react-native-material/core";
 
@@ -35,7 +35,7 @@ const TopicCard = ({ topic }: TopicCardProps) => {
                     <Chip
                         //FIXME substitute with Icon
                         contentContainerStyle={{backgroundColor: "var(--notification-color)"}}
-                        leading={props => <Ionicons
+                        leading={props => <Icon
                             name="globe-outline"
                             size={16}
                             color="var(--text-color)"/>}
