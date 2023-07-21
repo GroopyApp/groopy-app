@@ -1,9 +1,10 @@
 import React from 'react';
-import './TopicCard.css';
 import type { Topic } from '../../types/rest';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Text, View} from "react-native";
-import {Chip} from "@react-native-material/core";
+import {Image, Text, View} from "react-native";
+import ReadChip from "../ReadChip/ReadChip";
+import {useTheme} from "@react-navigation/native";
+import {TOPIC_CARD_STYLES} from "./TopicCardStylesheet";
 
 type TopicCardProps = {
     topic: Topic;
@@ -20,29 +21,27 @@ const TopicCard = ({ topic, onClick }: TopicCardProps) => {
         return text.substring(0, maxLength) + '...';
     };
 
+    const { colors } = useTheme();
+
     const truncatedDescription = truncateDescription(description, 200);
 
     return (
-        <View onTouchEnd={onClick}>
-            <div className="TopicCard">
-                <img className="TopicCardImage" src={imageUrl} alt="Topic" />
-                <div className="TopicCardContent">
-                    <div className="TopicCardTitle">{name}</div>
-                    <div className="TopicCardDescription">
-                        <Text>{truncatedDescription}</Text>
-                    </div>
-                </div>
-                <div className="TopicCardFlag">
-                    <Chip
-                        //FIXME substitute with Icon
-                        contentContainerStyle={{backgroundColor: "var(--notification-color)"}}
-                        leading={props => <Icon
+        <View onTouchEnd={onClick} style={TOPIC_CARD_STYLES.container}>
+                <Image style={TOPIC_CARD_STYLES.image} source={{uri: imageUrl}} />
+                <View style={TOPIC_CARD_STYLES.content}>
+                    <Text style={TOPIC_CARD_STYLES.title}>{name}</Text>
+                    <Text style={TOPIC_CARD_STYLES.description}>{truncatedDescription}</Text>
+                </View>
+                <View style={TOPIC_CARD_STYLES.language}>
+                    <ReadChip
+                        backgroundColor={colors.notification}
+                        textColor={colors.text}
+                        label={topic.language}
+                        icon={<Icon
                             name="globe-outline"
-                            size={16}
-                            color="var(--text-color)"/>}
-                        label={topic.language} />
-                </div>
-            </div>
+                            size={16} />}
+                    />
+                </View>
         </View>
     );
 };

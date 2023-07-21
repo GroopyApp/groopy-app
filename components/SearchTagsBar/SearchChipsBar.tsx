@@ -44,7 +44,7 @@ const SearchChipsBar = ({ onChipsUpdate, mode }: SearchChipsBarProps) => {
         <FAIcon name="hashtag" style={styles.leadingIcon} /> :
         <IOIcon name="language" style={styles.leadingIcon} />;
 
-    const placeholder = mode === "TAGS" ? "Add tags" : "Add language";
+    const placeholder = mode === "TAGS" ? "Type a tag" : "Type a language";
 
     return (
         <View style={{rowGap: 8}}>
@@ -64,6 +64,7 @@ const SearchChipsBar = ({ onChipsUpdate, mode }: SearchChipsBarProps) => {
                             <ReadChip
                                 backgroundColor={colors.notification}
                                 textColor={colors.text}
+                                onClick={() => removeChip(chip)}
                                 label={chip}
                                 icon={icon}
                                 key={index} />

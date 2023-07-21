@@ -9,17 +9,25 @@ import ChatsScreen from "./views/Chats/ChatsScreen";
 import ProfileScreen from "./views/Profile/ProfileScreen";
 import { UserContext } from "./context/contexts";
 import { NAVIGATION_ICONS } from "./configs/constants";
-import './assets/global.css'
+import './assets/fundations.css'
 import SessionService from "./services/SessionService";
 import LoginScreen from "./views/Login/LoginScreen";
-import { ActivityIndicator } from "react-native";
+import {ActivityIndicator } from "react-native";
 import { UserSession } from "./context/types";
+import {
+    setCustomView,
+    setCustomTextInput,
+    setCustomText,
+    setCustomImage,
+    setCustomTouchableOpacity
+} from 'react-native-global-props';
 import TopicScreen from "./views/Topic/TopicScreen";
 
 export default function App() {
 
     const [loading, setLoading] = useState(true);
     const [session, setSession] = useState<UserSession | null>(null);
+
 
     useEffect(() => {
         SessionService.retrieveSession().then((session) => {
@@ -42,6 +50,9 @@ export default function App() {
             notification: 'rgba(255, 193, 7, 0.5)',
         }
     };
+
+    setupFoundation();
+
     const DEFAULT_TITLE_STYLE = {
         fontWeight: "var(--important-font-weight)",
         fontSize: "var(--primary-font-size)",
@@ -106,3 +117,35 @@ export default function App() {
         </>
     );
 }
+
+function setupFoundation() {
+    const customViewProps = {
+        style: {
+            backgroundColor: 'var(--background-color)' // light gray
+        }
+    };
+
+    const customTextProps = {
+        style: {
+            fontSize: 16,
+            fontFamily: 'var(--primary-font-family)',
+            color: 'var(--text-color)'
+        }
+    };
+
+    const customImageProps = {
+        resizeMode: 'cover'
+    };
+
+    const customTouchableOpacityProps = {
+        hitSlop: { top: 15, right: 15, left: 15, bottom: 15 }
+    };
+
+// Calling the functions and passing the custom props into their respective params
+    setCustomView(customViewProps);
+    // setCustomTextInput(customTextInputProps);
+    setCustomText(customTextProps);
+    setCustomImage(customImageProps);
+    setCustomTouchableOpacity(customTouchableOpacityProps);
+}
+

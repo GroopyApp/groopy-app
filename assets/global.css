@@ -1,7 +1,0 @@
-@import "fundations.css";
-
-* {
-    font-family: var(--primary-font-family);
-    font-style: var(--primary-font-style);
-    font-weight: var(--primary-font-weight);
-}

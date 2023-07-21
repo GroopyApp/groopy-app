@@ -1,11 +1,12 @@
 :root {
     /* Colors */
     --primary-color: rgba(51, 102, 255, 1);
+    --primary-color-shadow: rgba(51, 102, 255, 0.4);
     --background-color: rgba(248, 248, 248, 1);
     --card-color: rgba(250, 250, 250, 1);
     --text-color: rgba(51, 51, 51, 1);
     --input-color: rgba(242, 242, 242, 1);
-    --border-color: rgba(234, 234, 234, 1);
+    --border-color: rgb(148, 145, 145);
     --notification-color: rgba(255, 193, 7, 0.5);
 /*rgb(153, 153, 153)*/
 

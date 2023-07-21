@@ -113,9 +113,9 @@ export type Topic = {
     imageUrl: string;
     categories: string[];
     language: string;
-    events: Event[];
     chatId: string;
-    subscribers: User[];
+    events?: Event[];
+    subscribers?: User[];
 };
 
 export type Event = {
@@ -123,10 +123,10 @@ export type Event = {
     name: string;
     description: string;
     location: Location;
-    image_url: string;
-    start_date: string;
-    end_date: string;
-    chat_id: string;
+    imageUrl: string;
+    startDate: string;
+    endDate: string;
+    chatId: string;
     participants: User[];
 };
 
@@ -154,6 +154,7 @@ export type Location = {
     location_id: string;
     latitude?: number;
     longitude?: number;
+    short_address?: string;
 };
 
 export type ErrorResponse = {

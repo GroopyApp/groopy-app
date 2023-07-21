@@ -6,14 +6,16 @@ type ReadChipProps = {
     textColor: Color,
     label: string,
     icon?: JSX.Element,
+    onClick?: () => void,
 }
-const ReadChip = ({backgroundColor, textColor, label, icon}: ReadChipProps) => {
+const ReadChip = ({backgroundColor, textColor, label, icon, onClick}: ReadChipProps) => {
     return (
         <Chip
             contentContainerStyle={{backgroundColor: backgroundColor}}
             labelStyle={{color: textColor}}
             //FIXME substitute with Icon
             leading={props => icon}
+            onPress={onClick}
             label={label} />
     )
 }
