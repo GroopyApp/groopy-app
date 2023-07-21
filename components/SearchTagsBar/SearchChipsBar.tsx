@@ -6,6 +6,7 @@ import InputChip from "../InputChip/InputChip";
 import { useTheme } from '@react-navigation/native';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
 import IOIcon from 'react-native-vector-icons/Ionicons';
+import ReadChip from "../ReadChip/ReadChip";
 
 type SearchChipsBarProps = {
     onChipsUpdate: (chips: string[]) => void;
@@ -59,14 +60,13 @@ const SearchChipsBar = ({ onChipsUpdate, mode }: SearchChipsBarProps) => {
                             placeholder={placeholder}
                             customContainerStyle={customContainerStyle}
                             customInputStyle={{color: colors.text}} />
-                        {chips.map((chip, index) => <Chip
-                            onPress={() => removeChip(chip)}
-                            contentContainerStyle={{backgroundColor: colors.notification}}
-                            labelStyle={{color: colors.text}}
-                            //FIXME substitute with Icon
-                            leading={props => icon}
-                            label={chip}
-                            key={index} />
+                        {chips.map((chip, index) =>
+                            <ReadChip
+                                backgroundColor={colors.notification}
+                                textColor={colors.text}
+                                label={chip}
+                                icon={icon}
+                                key={index} />
                         )}
                     </Stack>
                 </div>

@@ -9,7 +9,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import {FIXED_TOP_HEADER_STYLES, SCREEN_VIEW_STYLES, SCROLLABLE_BODY_STYLES} from "../../configs/constants";
 import GeoService from "../../services/GeoService";
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
 
     const [isLoading, setLoading] = useState(true);
     const [topics, setTopics] = useState<Topic[]>([]);
@@ -68,7 +68,10 @@ export default function HomeScreen() {
                         keyExtractor={({id}) => id}
                         renderItem={({item}) => (
                             <TopicCard
-                                key={item.id} topic={item} />
+                                key={item.id}
+                                topic={item}
+                                onClick={() => navigation.navigate('Topic', {topic: item})}
+                            />
                         )}
                     />
                 )}

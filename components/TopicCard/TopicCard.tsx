@@ -7,9 +7,10 @@ import {Chip} from "@react-native-material/core";
 
 type TopicCardProps = {
     topic: Topic;
+    onClick: () => void;
 };
 
-const TopicCard = ({ topic }: TopicCardProps) => {
+const TopicCard = ({ topic, onClick }: TopicCardProps) => {
     const { imageUrl, name, description, language } = topic;
 
     const truncateDescription = (text, maxLength) => {
@@ -22,7 +23,7 @@ const TopicCard = ({ topic }: TopicCardProps) => {
     const truncatedDescription = truncateDescription(description, 200);
 
     return (
-        <View>
+        <View onTouchEnd={onClick}>
             <div className="TopicCard">
                 <img className="TopicCardImage" src={imageUrl} alt="Topic" />
                 <div className="TopicCardContent">
