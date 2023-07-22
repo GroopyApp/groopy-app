@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 
 import {
-    StyleSheet,
     View,
     TextInput
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import {TOPIC_SCREEN_STYLES} from "./InputChipStylesheet";
 
 export interface InputChipProps {
     onChipInserted: (chipText: string) => void;
@@ -30,12 +29,12 @@ const InputChip: React.FC<InputChipProps> = ({ onChipInserted, placeholder, lead
     };
 
     const containerStyle = {
-        ...styles.container,
+        ...TOPIC_SCREEN_STYLES.container,
         ...customContainerStyle
     }
 
     const inputStyle = {
-        ...styles.input,
+        ...TOPIC_SCREEN_STYLES.input,
         ...customInputStyle
     }
 
@@ -51,24 +50,5 @@ const InputChip: React.FC<InputChipProps> = ({ onChipInserted, placeholder, lead
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 16,
-        marginRight: 8,
-        paddingHorizontal: 12,
-        height: 32,
-        borderWidth: 1,
-        width: 'var(--gorgeous-spacing)',
-    },
-    input: {
-        flex: 1,
-        fontSize: 12,
-        fontWeight: 'bold',
-        width: '100%'
-    },
-});
 
 export default InputChip;

@@ -1,31 +1,26 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import './SearchBar.css';
 import {TextInput, View } from "react-native";
+import { SEARCH_BAR_STYLES } from "./SearchBarStylesheet";
 
 type SearchBarProps = {
     onInputChange: (text: string) => void;
 };
 const SearchBar = ({ onInputChange }: SearchBarProps) => {
     return (
-        <View>
-            <div className="SearchBarContainer">
-                <span className="SearchBarIcon">
-                    <Icon
-                        name="ios-search"
-                        size="var(--normal-spacing)"
-                        color="var(--text-color)" />
-                </span>
-                <span className="SearchBarInput">
+        <View style={SEARCH_BAR_STYLES.container}>
+            <Icon
+                style={SEARCH_BAR_STYLES.icon}
+                name="ios-search"
+                size="var(--normal-spacing)"
+                color="var(--text-color)" />
                     <TextInput
-                        style={{ width: '100%' }}
+                        style={SEARCH_BAR_STYLES.input}
                         placeholder="Search"
                         placeholderTextColor="var(--text-color)"
                         defaultValue={""}
                         onChangeText={onInputChange}
                     />
-                </span>
-            </div>
         </View>
     );
 };

@@ -1,13 +1,12 @@
 import React, {useEffect, useState, useContext } from "react"
 import {ScrollView, ActivityIndicator, Animated, View} from 'react-native';
-import FlatList = Animated.FlatList;
-import { UserContext } from "../../context/contexts";
-import GatewayService from "../../services/GatewayService";
 import type { Topic } from "../../types/rest";
+import { UserContext } from "../../context/contexts";
 import TopicCard from "../../components/TopicCard/TopicCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import {FIXED_TOP_HEADER_STYLES, SCREEN_VIEW_STYLES, SCROLLABLE_BODY_STYLES} from "../../configs/constants";
 import GeoService from "../../services/GeoService";
+import GatewayService from "../../services/GatewayService";
+import { SCREEN_VIEW_STYLE, FIXED_TOP_HEADER_STYLE, SCROLLABLE_BODY_STYLE } from "../../configs/fundation";
 
 export default function HomeScreen({navigation}) {
 
@@ -56,14 +55,14 @@ export default function HomeScreen({navigation}) {
     }, []);
 
     return (
-        <View style={SCREEN_VIEW_STYLES}>
-            <View style={FIXED_TOP_HEADER_STYLES}>
+        <View style={SCREEN_VIEW_STYLE}>
+            <View style={FIXED_TOP_HEADER_STYLE}>
                 <SearchBar onInputChange={onTextSearch} />
             </View>
-            <ScrollView style={SCROLLABLE_BODY_STYLES}>
+            <ScrollView style={SCROLLABLE_BODY_STYLE}>
                 {isLoading ? (
                     <ActivityIndicator />
-                ) : (<FlatList
+                ) : (<Animated.FlatList
                         data={filteredTopics}
                         keyExtractor={({id}) => id}
                         renderItem={({item}) => (

@@ -1,13 +1,13 @@
 import React, {useContext, useEffect, useState} from "react"
 import {ScrollView, ActivityIndicator, Animated, View} from 'react-native';
 import FlatList = Animated.FlatList;
+import { UserContext } from "../../context/contexts";
 import GatewayService from "../../services/GatewayService";
 import type { Topic } from "../../types/rest";
 import TopicCard from "../../components/TopicCard/TopicCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import SearchChipBar from "../../components/SearchTagsBar/SearchChipsBar";
-import {FIXED_TOP_HEADER_STYLES, SCREEN_VIEW_STYLES, SCROLLABLE_BODY_STYLES} from "../../configs/constants";
-import {UserContext} from "../../context/contexts";
+import SearchChipBar from "../../components/SearchChipsBar/SearchChipsBar";
+import { SCREEN_VIEW_STYLE, FIXED_TOP_HEADER_STYLE, SCROLLABLE_BODY_STYLE } from "../../configs/fundation";
 
 export default function SearchScreen({navigation}) {
 
@@ -68,14 +68,14 @@ export default function SearchScreen({navigation}) {
     }, [searchTags]);
 
     return (
-        <View style={SCREEN_VIEW_STYLES}>
-            <View style={FIXED_TOP_HEADER_STYLES}>
+        <View style={SCREEN_VIEW_STYLE}>
+            <View style={FIXED_TOP_HEADER_STYLE}>
                 <SearchBar onInputChange={onTextSearch} />
                 <SearchChipBar onChipsUpdate={formatTags} mode="TAGS" />
                 {/*<SearchChipBar onChipsUpdate={formatTags} mode="LANG" />*/}
                 {/* Introduce languages filter */}
             </View>
-            <ScrollView style={SCROLLABLE_BODY_STYLES}>
+            <ScrollView style={SCROLLABLE_BODY_STYLE}>
                 {isLoading ? (
                     <ActivityIndicator />
                 ) : (<FlatList

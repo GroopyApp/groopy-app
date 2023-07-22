@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {StyleSheet, View} from "react-native";
-import {Stack, Chip } from "@react-native-material/core";
-import './SearchChipsBar.css';
+import {Stack } from "@react-native-material/core";
 import InputChip from "../InputChip/InputChip";
 import { useTheme } from '@react-navigation/native';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
 import IOIcon from 'react-native-vector-icons/Ionicons';
 import ReadChip from "../ReadChip/ReadChip";
+import {SEARCH_CHIPS_BAR_STYLES} from "./SearchChipsBarStylesheet";
 
 type SearchChipsBarProps = {
     onChipsUpdate: (chips: string[]) => void;
@@ -47,9 +47,8 @@ const SearchChipsBar = ({ onChipsUpdate, mode }: SearchChipsBarProps) => {
     const placeholder = mode === "TAGS" ? "Type a tag" : "Type a language";
 
     return (
-        <View style={{rowGap: 8}}>
-            <div className="SearchChipsBarContainer">
-                <div className="SearchChipsBarChips">
+        <View style={SEARCH_CHIPS_BAR_STYLES.container}>
+            <View style={SEARCH_CHIPS_BAR_STYLES.chips}>
                     <Stack wrap fill
                            spacing={4}
                            style={{rowGap: 8}}
@@ -70,8 +69,7 @@ const SearchChipsBar = ({ onChipsUpdate, mode }: SearchChipsBarProps) => {
                                 key={index} />
                         )}
                     </Stack>
-                </div>
-            </div>
+            </View>
         </View>
     );
 };

@@ -4,10 +4,10 @@ import { UserContext } from "../../context/contexts";
 import type { Topic } from "../../types/rest";
 import FAIcon from "react-native-vector-icons/FontAwesome5";
 import IOIcon from "react-native-vector-icons/Ionicons";
-import {SCROLLABLE_BODY_STYLES} from "../../configs/constants";
 import {Stack} from "@react-native-material/core";
 import ReadChip from "../../components/ReadChip/ReadChip";
 import { useTheme } from "@react-navigation/native";
+import { SCROLLABLE_BODY_STYLE } from "../../configs/fundation";
 import {TOPIC_SCREEN_STYLES} from "./TopicScreenStylesheet";
 import EventCard from "../../components/EventCard/EventCard";
 import eventCard from "../../components/EventCard/EventCard";
@@ -23,7 +23,7 @@ export default function TopicScreen({ navigation, route }) {
     const { colors } = useTheme();
 
     return (
-        <ScrollView style={SCROLLABLE_BODY_STYLES}>
+        <ScrollView style={SCROLLABLE_BODY_STYLE}>
             <Image
                 style={TOPIC_SCREEN_STYLES.image}
                 source={{
@@ -43,14 +43,14 @@ export default function TopicScreen({ navigation, route }) {
                             backgroundColor={colors.primary}
                             textColor={colors.text}
                             label={topic!.language}
-                            icon={<IOIcon name="language" style={styles.leadingIcon} />}
+                            icon={<IOIcon name="language" style={TOPIC_SCREEN_STYLES.leadingIcon} />}
                         />
                         {topic!.categories.map((category, index) =>
                             <ReadChip
                                 backgroundColor={colors.notification}
                                 textColor={colors.text}
                                 label={category}
-                                icon={<FAIcon name="hashtag" style={styles.leadingIcon} /> }
+                                icon={<FAIcon name="hashtag" style={TOPIC_SCREEN_STYLES.leadingIcon} /> }
                                 key={index} />
                         )}
                     </Stack>
@@ -65,10 +65,3 @@ export default function TopicScreen({ navigation, route }) {
         </ScrollView>
     );
 }
-
-const styles = StyleSheet.create({
-    leadingIcon: {
-        marginRight: 8,
-        fontSize: 24,
-    }
-});
