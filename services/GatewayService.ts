@@ -29,6 +29,10 @@ const GatewayService = {
             imageUrl: result.data.photo_url,
             token: result.token
         } as UserSession);
+    },
+    updateTopicSubscription: async (request: SubscribeTopicRequest, token: string) => {
+        const response = await apiRequestCall<SubscribeTopicResponseWrapper>({"subscribeTopicRequest": request}, token);
+        return response["subscribeTopicResponse"];
     }
 }
 

@@ -1,5 +1,5 @@
-import React, { useContext } from "react"
-import {ScrollView, Text, Image, View, Button, TouchableHighlight} from 'react-native';
+import React, {useContext, useEffect, useState} from "react"
+import {ScrollView, Text, Image, View, Button, TouchableHighlight, ActivityIndicator} from 'react-native';
 import { UserContext } from "../../context/contexts";
 import type { Topic } from "../../types/rest";
 import FAIcon from "react-native-vector-icons/FontAwesome5";
@@ -7,30 +7,56 @@ import IOIcon from "react-native-vector-icons/Ionicons";
 import {Stack} from "@react-native-material/core";
 import ReadChip from "../../components/ReadChip/ReadChip";
 import { useTheme } from "@react-navigation/native";
-import {ExtraThemeColors, SCROLLABLE_BODY_STYLE} from "../../configs/fundation";
+import {ExtraThemeColors, SCROLLABLE_BODY_STYLE, Theme} from "../../configs/fundation";
 import {TOPIC_SCREEN_STYLES} from "./TopicScreenStylesheet";
 import EventCard from "../../components/EventCard/EventCard";
+import GatewayService from "../../services/GatewayService";
 
 type TopicScreenProps = {
     topic: Topic | null;
 };
 export default function TopicScreen({ navigation, route }) {
 
-    const { topic }: TopicScreenProps = route.params;
+    const [topic, setTopic] = useState<Topic>(route.params.topic);
+    const [subscriptionUpdateInProgress, setSubscriptionUpdateInProgress] = useState(false);
 
     const userSession = useContext(UserContext);
-    const isUserSubscribed = topic?.subscribers?.find(user => user.userId === userSession?.username);
-
+    const isUserSubscribed = !!topic?.subscribers?.find(user => user.userId === userSession?.username);
     const { colors } = useTheme();
+
+    const updateSubscription = () => {
+        setSubscriptionUpdateInProgress(true);
+        GatewayService.updateTopicSubscription({
+            topic_id: topic.id,
+            user_id: userSession!.username},
+            userSession!.token)
+            .then(response => {
+                setSubscriptionUpdateInProgress(false);
+                setTopic(response.topic);
+            })
+            .catch(error => {
+                console.log("add error alert", error);
+            });
+    }
+
+    useEffect(() => {}, [topic]);
 
     return (
         <ScrollView style={SCROLLABLE_BODY_STYLE}>
-            <Image
-                style={TOPIC_SCREEN_STYLES.image}
-                source={{
-                    uri: topic!.imageUrl,
-                }}
-            />
+            <View style={TOPIC_SCREEN_STYLES.head}>
+                <ReadChip
+                    style={TOPIC_SCREEN_STYLES.headChip}
+                    backgroundColor={Theme.colors.notification}
+                    textColor={Theme.colors.text}
+                    icon={<IOIcon style={{fontSize: 24}} name="people" />}
+                    label={topic.subscribers?.length || 0} />
+                <Image
+                    style={TOPIC_SCREEN_STYLES.headImage}
+                    source={{
+                        uri: topic!.imageUrl,
+                    }}
+                />
+            </View>
             <View style={TOPIC_SCREEN_STYLES.container}>
                 <Text style={TOPIC_SCREEN_STYLES.titleText}>{topic!.name}</Text>
                 <View style={TOPIC_SCREEN_STYLES.tagsStack} >
@@ -61,17 +87,20 @@ export default function TopicScreen({ navigation, route }) {
                         style={isUserSubscribed ?
                             {...TOPIC_SCREEN_STYLES.button, backgroundColor: ExtraThemeColors.danger}
                             : {...TOPIC_SCREEN_STYLES.button, width: "90%"}}
-                            onPress={() => {}} >
-                        <View style={TOPIC_SCREEN_STYLES.buttonTextContainer}>
+                            onPress={updateSubscription} >
+                        {subscriptionUpdateInProgress ?
+                            <ActivityIndicator />
+                            :<View style={TOPIC_SCREEN_STYLES.buttonTextContainer}>
                             {isUserSubscribed ? <>
-                                    <IOIcon style={TOPIC_SCREEN_STYLES.buttonIcon} name="remove-sharp" />
+                                    <IOIcon style={TOPIC_SCREEN_STYLES.buttonIcon} name="remove-sharp"/>
                                     <Text style={TOPIC_SCREEN_STYLES.buttonText}>Unsubscribe</Text>
                                 </>
                                 : <>
-                                    <IOIcon style={TOPIC_SCREEN_STYLES.buttonIcon} name="add-sharp" />
+                                    <IOIcon style={TOPIC_SCREEN_STYLES.buttonIcon} name="add-sharp"/>
                                     <Text style={TOPIC_SCREEN_STYLES.buttonText}>Join</Text>
                                 </>}
                         </View>
+                        }
                     </TouchableHighlight>
                     {isUserSubscribed &&
                         <TouchableHighlight

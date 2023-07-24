@@ -8,10 +8,11 @@ import {TOPIC_CARD_STYLES} from "./TopicCardStylesheet";
 
 type TopicCardProps = {
     topic: Topic;
+    showAlreadySubscribed?: boolean;
     onClick: () => void;
 };
 
-const TopicCard = ({ topic, onClick }: TopicCardProps) => {
+const TopicCard = ({ topic, onClick, showAlreadySubscribed }: TopicCardProps) => {
     const { imageUrl, name, description, language } = topic;
 
     const truncateDescription = (text, maxLength) => {
@@ -29,6 +30,11 @@ const TopicCard = ({ topic, onClick }: TopicCardProps) => {
         <View onTouchEnd={onClick} style={TOPIC_CARD_STYLES.container}>
                 <Image style={TOPIC_CARD_STYLES.image} source={{uri: imageUrl}} />
                 <View style={TOPIC_CARD_STYLES.content}>
+                    {showAlreadySubscribed &&
+                        <Text style={TOPIC_CARD_STYLES.alreadySubscribedInfo}>
+                           Already subscribed
+                        </Text>
+                    }
                     <Text style={TOPIC_CARD_STYLES.title}>{name}</Text>
                     <Text style={TOPIC_CARD_STYLES.description}>{truncatedDescription}</Text>
                 </View>

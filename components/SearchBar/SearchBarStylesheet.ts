@@ -18,7 +18,7 @@ export const SEARCH_BAR_STYLES = StyleSheet.create({
         flex: 1,
         paddingBottom: "var(--tiny-spacing)",
         fontSize: 16,
-        color: "var(--input-color)",
+        color: Theme.colors.text,
         width: "100%"
     } as TextStyle
 });

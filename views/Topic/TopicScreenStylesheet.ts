@@ -20,10 +20,19 @@ export const TOPIC_SCREEN_STYLES = StyleSheet.create({
         fontSize: 16,
         margin: 'var(--small-spacing)'
     } as TextStyle,
-    image: {
+    head: {
         width: '100%',
-        height: 350
+    } as ViewStyle,
+    headImage: {
+        height: 350,
+        zIndex: 1
     } as ImageStyle,
+    headChip: {
+        position: "absolute",
+        bottom: 4,
+        right: 4,
+        zIndex: 2,
+    } as ViewStyle,
     tagsStack: {
         margin: 'var(--small-spacing)',
         marginLeft: 'var(--normal-spacing)'

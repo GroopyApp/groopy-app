@@ -47,12 +47,14 @@ export default function HomeScreen({navigation}) {
     }
 
     useEffect(() => {
-        getTopics();
-        if (topics.length === 0) {
-            //TODO add empty view
-            console.log("No topics found");
-        }
-    }, []);
+        return navigation.addListener('focus', () => {
+            getTopics();
+            if (topics.length === 0) {
+                //TODO add empty view
+                console.log("No topics found");
+            }
+        });
+    }, [navigation]);
 
     return (
         <View style={SCREEN_VIEW_STYLE}>

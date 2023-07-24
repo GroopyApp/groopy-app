@@ -65,7 +65,14 @@ export default function SearchScreen({navigation}) {
 
     useEffect(() => {
         getTopics();
-    }, [searchTags]);
+        return navigation.addListener('focus', () => {
+            getTopics();
+            if (topics.length === 0) {
+                //TODO add empty view
+                console.log("No topics found");
+            }
+        });
+    }, [searchTags, navigation]);
 
     return (
         <View style={SCREEN_VIEW_STYLE}>
@@ -85,7 +92,9 @@ export default function SearchScreen({navigation}) {
                             <TopicCard
                                 key={item.id}
                                 topic={item}
-                                onClick={() => navigation.navigate('Topic', {topic: item})}/>
+                                onClick={() => navigation.navigate('Topic', {topic: item})}
+                                showAlreadySubscribed={!!item.subscribers?.find(user => user.userId === userSession?.username)}
+                            />
                         )}
                     />
                 )}

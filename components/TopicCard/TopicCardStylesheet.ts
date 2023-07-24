@@ -1,4 +1,5 @@
 import {ImageStyle, StyleSheet, TextStyle, ViewStyle} from "react-native";
+import {ExtraThemeColors, Theme} from "../../configs/fundation";
 
 export const TOPIC_CARD_STYLES = StyleSheet.create({
     container: {
@@ -44,4 +45,12 @@ export const TOPIC_CARD_STYLES = StyleSheet.create({
         right: 2,
         alignItems: 'center'
     } as ViewStyle,
+    alreadySubscribedInfo: {
+        borderStyle: "solid",
+        width: "fit-content",
+        borderWidth: 1,
+        borderRadius: 12,
+        paddingHorizontal: 8,
+        fontSize: 12,
+    } as TextStyle
 })

@@ -21,7 +21,7 @@ export const Theme = {
 };
 
 export const ExtraThemeColors = {
-    danger: 'rgb(222,17,17)'
+    danger: 'rgb(222,17,17)',
 }
 
 export const DEFAULT_SCREEN_TITLE_STYLE = {
