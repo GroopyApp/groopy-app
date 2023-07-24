@@ -33,7 +33,11 @@ const GatewayService = {
     updateTopicSubscription: async (request: SubscribeTopicRequest, token: string) => {
         const response = await apiRequestCall<SubscribeTopicResponseWrapper>({"subscribeTopicRequest": request}, token);
         return response["subscribeTopicResponse"];
-    }
+    },
+    updateEventSubscription: async (request: SubscribeEventRequest, token: string) => {
+        const response = await apiRequestCall<SubscribeEventResponseWrapper>({"subscribeEventRequest": request}, token);
+        return response["subscribeEventResponse"];
+    },
 }
 
 const apiRequestCall = async <T>(request: WallRequestWrapper |

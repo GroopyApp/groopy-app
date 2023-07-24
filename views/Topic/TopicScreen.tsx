@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react"
-import {ScrollView, Text, Image, View, Button, TouchableHighlight, ActivityIndicator} from 'react-native';
+import {ScrollView, Text, Image, View, TouchableHighlight, ActivityIndicator} from 'react-native';
 import { UserContext } from "../../context/contexts";
 import type { Topic } from "../../types/rest";
 import FAIcon from "react-native-vector-icons/FontAwesome5";
@@ -12,9 +12,6 @@ import {TOPIC_SCREEN_STYLES} from "./TopicScreenStylesheet";
 import EventCard from "../../components/EventCard/EventCard";
 import GatewayService from "../../services/GatewayService";
 
-type TopicScreenProps = {
-    topic: Topic | null;
-};
 export default function TopicScreen({ navigation, route }) {
 
     const [topic, setTopic] = useState<Topic>(route.params.topic);
@@ -117,7 +114,8 @@ export default function TopicScreen({ navigation, route }) {
                 <Text style={TOPIC_SCREEN_STYLES.contentText}>{topic!.description}</Text>
                 <Text style={TOPIC_SCREEN_STYLES.subtitleText}>Upcoming events</Text>
                 <View style={TOPIC_SCREEN_STYLES.events}>
-                    {topic!.events?.map(event => <EventCard key={event.id} event={event} onClick={navigation.navigate('Event', {event: event})} />)}
+                    {topic!.events?.map(event =>
+                        <EventCard key={event.id} event={event} onClick={() => navigation.navigate('Event', {event: event})} />)}
                 </View>
             </View>
         </ScrollView>

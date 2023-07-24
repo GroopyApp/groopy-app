@@ -16,6 +16,7 @@ import { NAVIGATION_ICONS } from "./configs/constants";
 import SessionService from "./services/SessionService";
 import { DEFAULT_SCREEN_TITLE_STYLE, setupFoundation, Theme } from "./configs/fundation";
 import './assets/fundations.css'
+import EventScreen from "./views/Event/EventScreen";
 
 export default function App() {
 
@@ -34,6 +35,19 @@ export default function App() {
 
     setupFoundation();
 
+    const TopicStackNavigator = () => {
+        const TopicStack = createNativeStackNavigator();
+
+        return (
+            <TopicStack.Navigator initialRouteName="Topic">
+                {/*@ts-ignore*/}
+                <TopicStack.Screen name="Topic" component={TopicScreen} options={{ title: 'Topic details', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE }}/>
+                {/*@ts-ignore*/}
+                <TopicStack.Screen name="Event" component={EventScreen} options={{ title: 'Event details', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE }}/>
+            </TopicStack.Navigator>
+        )
+    }
+
     const HomeStackNavigator = () => {
         const HomeStack = createNativeStackNavigator(); // Usa createNativeStackNavigator fornito da @react-navigation/native-stack
 
@@ -42,7 +56,7 @@ export default function App() {
                 {/*@ts-ignore*/}
                 <HomeStack.Screen name="Home" component={HomeScreen} options={{ title: 'Your topics around', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE }}/>
                 {/*@ts-ignore*/}
-                <HomeStack.Screen name="Topic" component={TopicScreen} options={{ title: 'Topic details', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE }}/>
+                <HomeStack.Screen name="TopicStack" component={TopicStackNavigator} options={{ title: 'Topic details', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE, headerShown: false }}/>
             </HomeStack.Navigator>
         )
     }
@@ -55,7 +69,7 @@ export default function App() {
                 {/*@ts-ignore*/}
                 <SearchStack.Screen name="Search" component={SearchScreen} options={{ title: 'Discover', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE }}/>
                 {/*@ts-ignore*/}
-                <SearchStack.Screen name="Topic" component={TopicScreen} options={{ title: 'Topic details', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE }}/>
+                <SearchStack.Screen name="TopicStack" component={TopicStackNavigator} options={{title: 'Topic details', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE, headerShown: false}}/>
             </SearchStack.Navigator>
         )
     }

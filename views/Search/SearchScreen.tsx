@@ -8,6 +8,7 @@ import TopicCard from "../../components/TopicCard/TopicCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import SearchChipBar from "../../components/SearchChipsBar/SearchChipsBar";
 import { SCREEN_VIEW_STYLE, FIXED_TOP_HEADER_STYLE, SCROLLABLE_BODY_STYLE } from "../../configs/fundation";
+import {goToTopicStack} from "../../utils/NavigationUtils";
 
 export default function SearchScreen({navigation}) {
 
@@ -92,7 +93,7 @@ export default function SearchScreen({navigation}) {
                             <TopicCard
                                 key={item.id}
                                 topic={item}
-                                onClick={() => navigation.navigate('Topic', {topic: item})}
+                                onClick={() => goToTopicStack(navigation, item)}
                                 showAlreadySubscribed={!!item.subscribers?.find(user => user.userId === userSession?.username)}
                             />
                         )}

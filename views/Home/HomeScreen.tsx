@@ -7,6 +7,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import GeoService from "../../services/GeoService";
 import GatewayService from "../../services/GatewayService";
 import { SCREEN_VIEW_STYLE, FIXED_TOP_HEADER_STYLE, SCROLLABLE_BODY_STYLE } from "../../configs/fundation";
+import {goToTopicStack} from "../../utils/NavigationUtils";
 
 export default function HomeScreen({navigation}) {
 
@@ -71,7 +72,7 @@ export default function HomeScreen({navigation}) {
                             <TopicCard
                                 key={item.id}
                                 topic={item}
-                                onClick={() => navigation.navigate('Topic', {topic: item})}
+                                onClick={() => goToTopicStack(navigation, item)}
                             />
                         )}
                     />

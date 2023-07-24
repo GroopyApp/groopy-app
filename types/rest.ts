@@ -139,6 +139,7 @@ export type User = {
     phone: string;
     gender: string;
     language: string;
+    photoUrl: string;
     subscribedTopics: string[];
     subscribedEvents: string[];
 };
