@@ -20,6 +20,10 @@ export const Theme = {
     }
 };
 
+export const ExtraThemeColors = {
+    danger: 'rgb(222,17,17)'
+}
+
 export const DEFAULT_SCREEN_TITLE_STYLE = {
     fontWeight: "var(--important-font-weight)",
     fontSize: "var(--primary-font-size)",

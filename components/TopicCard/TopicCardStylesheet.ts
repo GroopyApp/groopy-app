@@ -2,13 +2,13 @@ import {ImageStyle, StyleSheet, TextStyle, ViewStyle} from "react-native";
 
 export const TOPIC_CARD_STYLES = StyleSheet.create({
     container: {
-        height: 'var(--huge-spacing)',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        paddingBlock: 'var(--small-spacing)',
+        paddingBottom: 'var(--small-spacing)',
         marginTop: 'var(--small-spacing)',
         marginHorizontal: 'var(--tiny-spacing)',
+        borderRadius: 12,
         shadowRadius: 1.3,
         shadowOffset: {
             width: 0,
@@ -21,7 +21,8 @@ export const TOPIC_CARD_STYLES = StyleSheet.create({
         width: 'var(--huge-spacing)',
         height: 'var(--huge-spacing)',
         marginRight: 'var(--normal-spacing)',
-        borderRadius: 2
+        borderTopLeftRadius: 12,
+        borderBottomLeftRadius: 12,
     } as ImageStyle,
     content: {
         flex: 1,

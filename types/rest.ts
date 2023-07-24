@@ -131,16 +131,16 @@ export type Event = {
 };
 
 export type User = {
-    user_id: string;
+    userId: string;
     name: string;
     surname: string;
-    birth_date: string;
+    birthDate: string;
     email: string;
     phone: string;
     gender: string;
     language: string;
-    subscribed_topics: string[];
-    subscribed_events: string[];
+    subscribedTopics: string[];
+    subscribedEvents: string[];
 };
 
 export type SearchCriteria = {
