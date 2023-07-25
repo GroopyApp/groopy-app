@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from "react"
 import {ScrollView, View} from 'react-native';
+import { HeaderBackButton } from '@react-navigation/elements';
 import { SCREEN_VIEW_STYLE } from "../../configs/fundation";
 import MessageBubble from "../../components/MessageBubble/MessageBubble";
 import {ChatInfo} from "../../types/domain";
@@ -56,7 +57,17 @@ export default function ChatScreen({navigation, route}) {
         };
 
         navigation.addListener('focus', async () => {
-            navigation.setOptions({title: chatInfo.chatName});
+            navigation.setOptions({
+                title: chatInfo.chatName,
+                headerLeft: (props) => (
+                    <HeaderBackButton
+                        {...props}
+                        onPress={() => {
+                            navigation.goBack();
+                        }}
+                    />
+                )
+            });
             await subscribeToChannel();
         });
 

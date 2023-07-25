@@ -9,5 +9,5 @@ export const goToTopicStack = (navigation, topic: Topic) => {
 }
 
 export const goToChat = (navigation, chatInfo: ChatInfo) => {
-    navigation.navigate('ChatsStack', {screen: 'Chat', params: {chatInfo}});
+    navigation.navigate('ChatsStack', {screen: 'Chat', params: {chatInfo}, merge: true});
 }
