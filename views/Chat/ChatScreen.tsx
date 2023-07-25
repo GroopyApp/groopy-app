@@ -15,24 +15,19 @@ export default function ChatScreen({navigation, route}) {
     const chatInfo: ChatInfo = route.params.chatInfo;
     const userSession = useContext(UserContext);
     const scrollViewRef = React.useRef<ScrollView>();
-
-
+    
     const [messages, setMessages] = useState<ChatMessage[]>([]);
 
     const fireMessage = async (message) => {
         await ChatService.sendMessage(chatInfo.channelName, message, userSession!.username);
     }
 
-    const onMessage = (message: ChatMessage) => {
-        setMessages((messages) => [...messages, message]);
-    }
+    const handleMessage = (message) => {
+        setMessages((prevMessages) => [...prevMessages, message]);
+    };
 
     useEffect(() => {
         let isSubscribed = true;
-
-        const handleMessage = (message) => {
-            setMessages((prevMessages) => [...prevMessages, message]);
-        };
 
         const subscribeToChannel = async () => {
             try {

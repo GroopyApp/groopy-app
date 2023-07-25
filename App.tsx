@@ -24,8 +24,8 @@ import './assets/fundations.css'
 export default function App() {
 
     const [loading, setLoading] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [session, setSession] = useState<UserSession | null>(null);
-
     useEffect(() => {
         setupFoundation();
         SessionService.retrieveSession().then(async (session) => {
@@ -33,7 +33,7 @@ export default function App() {
             setSession(session);
             await ChatService.init(session!);
         });
-    }, []);
+    }, [isLoggedIn]);
 
     const TopicStackNavigator = () => {
         const TopicStack = createNativeStackNavigator();
@@ -88,6 +88,7 @@ export default function App() {
     }
 
     const Nav = createBottomTabNavigator();
+    const LoginStack = createNativeStackNavigator();
 
     return (
         <>
@@ -115,7 +116,7 @@ export default function App() {
                         </PubNubProvider>
                     </UserContext.Provider>
                     :
-                    <LoginScreen />
+                    <LoginScreen onSuccess={() => setIsLoggedIn(true)}/>
             }
         </>
     );

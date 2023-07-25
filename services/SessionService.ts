@@ -11,17 +11,6 @@ const SessionService = {
     storeSession: async (session: UserSession): Promise<void> => {
         await AsyncStorage.setItem(USER_SESSION_KEY, JSON.stringify(session));
     },
-}
-
-AsyncStorage.setItem(USER_SESSION_KEY, JSON.stringify( {
-    username: 'test8',
-        email: 'test8@test.com',
-    firstName: 'Test',
-    lastName: 'De Test',
-    imageUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
-    token: '1234567890',
-    topicChatRooms: [],
-    eventChatRooms: [],
-}));
+};
 
 export default SessionService;

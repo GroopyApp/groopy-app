@@ -22,11 +22,11 @@ const GatewayService = {
         const response = await apiAuthCall<SignInResponseWrapper>({"signInRequest": request});
         const result = response["signInResponse"];
         await SessionService.storeSession({
-            username: result.data.user_id,
+            username: result.data.userId,
             email: result.data.email,
             firstName: result.data.name,
             lastName: result.data.surname,
-            imageUrl: result.data.photo_url,
+            imageUrl: result.data.photoUrl,
             token: result.token
         } as UserSession);
     },

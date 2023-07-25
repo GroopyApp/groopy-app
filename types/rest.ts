@@ -37,12 +37,12 @@ export type UserDetailsResponse = {
 };
 
 export type UserDetails = {
-    user_id: string;
+    userId: string;
     name: string;
     surname: string;
     email: string;
-    photo_url: string;
-    birth_date: string;
+    photoUrl: string;
+    birthDate: string;
 };
 
 export type WallRequest = {

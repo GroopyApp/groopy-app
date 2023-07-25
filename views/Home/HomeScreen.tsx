@@ -52,6 +52,7 @@ export default function HomeScreen({navigation}) {
             getTopics();
             if (topics.length === 0) {
                 //TODO add empty view
+                setLoading(false);
                 console.log("No topics found");
             }
         });
