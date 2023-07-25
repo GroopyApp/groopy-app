@@ -10,6 +10,7 @@ import {EVENT_SCREEN_STYLES} from "./EventScreenStylesheet";
 import GatewayService from "../../services/GatewayService";
 import UserCard from "../../components/UserCard/UserCard";
 import {parseShortDateTime} from "../../utils/DateUtils";
+import {goToChat} from "../../utils/NavigationUtils";
 
 
 export default function EventScreen({ navigation, route }) {
@@ -88,7 +89,7 @@ export default function EventScreen({ navigation, route }) {
                     {isUserSubscribed &&
                         <TouchableHighlight
                             style={EVENT_SCREEN_STYLES.button}
-                            onPress={() => {}} >
+                            onPress={() => goToChat(navigation, {chatName: event.name, channelName: event.chatInfo.groupName})} >
                             <View style={EVENT_SCREEN_STYLES.buttonTextContainer}>
                                 <IOIcon style={EVENT_SCREEN_STYLES.buttonIcon} name="chatbubbles-sharp" />
                                 <Text style={EVENT_SCREEN_STYLES.buttonText}>Chat</Text>

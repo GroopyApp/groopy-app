@@ -11,6 +11,7 @@ import {ExtraThemeColors, SCROLLABLE_BODY_STYLE, Theme} from "../../configs/fund
 import {TOPIC_SCREEN_STYLES} from "./TopicScreenStylesheet";
 import EventCard from "../../components/EventCard/EventCard";
 import GatewayService from "../../services/GatewayService";
+import {goToChat} from "../../utils/NavigationUtils";
 
 export default function TopicScreen({ navigation, route }) {
 
@@ -102,7 +103,7 @@ export default function TopicScreen({ navigation, route }) {
                     {isUserSubscribed &&
                         <TouchableHighlight
                             style={TOPIC_SCREEN_STYLES.button}
-                            onPress={() => {}} >
+                            onPress={() => goToChat(navigation, {chatName: topic.name, channelName: topic.chatInfo.channelName})} >
                             <View style={TOPIC_SCREEN_STYLES.buttonTextContainer}>
                                 <IOIcon style={TOPIC_SCREEN_STYLES.buttonIcon} name="chatbubbles-sharp" />
                                 <Text style={TOPIC_SCREEN_STYLES.buttonText}>Chat</Text>

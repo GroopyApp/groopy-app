@@ -113,7 +113,7 @@ export type Topic = {
     imageUrl: string;
     categories: string[];
     language: string;
-    chatId: string;
+    chatInfo: ChatInfo;
     events?: Event[];
     subscribers?: User[];
 };
@@ -126,7 +126,7 @@ export type Event = {
     imageUrl: string;
     startDate: string;
     endDate: string;
-    chatId: string;
+    chatInfo: ChatInfo;
     participants: User[];
 };
 
@@ -157,6 +157,12 @@ export type Location = {
     longitude?: number;
     short_address?: string;
 };
+
+export type ChatInfo = {
+    channelName: string;
+    groupName: string;
+    uuid: string
+}
 
 export type ErrorResponse = {
     parameters: Record<string, string>;

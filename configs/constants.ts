@@ -24,3 +24,8 @@ export const GATEWAY_CONFIG = {
     authEndpoint: '/auth',
     requestEndpoint: '/request',
 }
+
+export const PUBNUB_CONFIG = {
+    publishKey: 'pub-c-dbb19108-b72c-4c11-82c1-ae22896f203d',
+    subscribeKey: 'sub-c-7f2c8668-6e8f-44ef-b387-cb7882fd63f1',
+}

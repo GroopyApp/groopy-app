@@ -5,4 +5,6 @@ export type UserSession = {
     firstName: string;
     lastName: string;
     imageUrl: string;
+    topicChatRooms: string[];
+    eventChatRooms: string[];
 }

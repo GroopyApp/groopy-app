@@ -3,37 +3,37 @@ import {ActivityIndicator } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { PubNubProvider } from 'pubnub-react';
+import { UserContext } from "./context/contexts";
+import { UserSession } from "./context/types";
+import SessionService from "./services/SessionService";
+import ChatService from "./services/ChatService";
 import HomeScreen from "./views/Home/HomeScreen";
 import SearchScreen from "./views/Search/SearchScreen";
 import ChatsScreen from "./views/Chats/ChatsScreen";
 import ProfileScreen from "./views/Profile/ProfileScreen";
 import LoginScreen from "./views/Login/LoginScreen";
 import TopicScreen from "./views/Topic/TopicScreen";
-import { UserContext } from "./context/contexts";
-import { UserSession } from "./context/types";
-import { NAVIGATION_ICONS } from "./configs/constants";
-import SessionService from "./services/SessionService";
-import { DEFAULT_SCREEN_TITLE_STYLE, setupFoundation, Theme } from "./configs/fundation";
-import './assets/fundations.css'
 import EventScreen from "./views/Event/EventScreen";
+import ChatScreen from "./views/Chat/ChatScreen";
+import { NAVIGATION_ICONS } from "./configs/constants";
+import { DEFAULT_SCREEN_TITLE_STYLE, setupFoundation, Theme } from "./configs/fundation";
+import Icon from 'react-native-vector-icons/Ionicons';
+import './assets/fundations.css'
 
 export default function App() {
 
     const [loading, setLoading] = useState(true);
     const [session, setSession] = useState<UserSession | null>(null);
 
-
     useEffect(() => {
-        SessionService.retrieveSession().then((session) => {
+        setupFoundation();
+        SessionService.retrieveSession().then(async (session) => {
             setLoading(false);
             setSession(session);
+            await ChatService.init(session!);
         });
     }, []);
-
-    const Nav = createBottomTabNavigator();
-
-    setupFoundation();
 
     const TopicStackNavigator = () => {
         const TopicStack = createNativeStackNavigator();
@@ -61,6 +61,19 @@ export default function App() {
         )
     }
 
+    const ChatStackNavigator = () => {
+        const ChatStack = createNativeStackNavigator(); // Usa createNativeStackNavigator fornito da @react-navigation/native-stack
+
+        return (
+            <ChatStack.Navigator>
+                {/*@ts-ignore*/}
+                <ChatStack.Screen name="Chats" component={ChatsScreen} options={{ title: 'Conversations', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE }}/>
+                {/*@ts-ignore*/}
+                <ChatStack.Screen name="Chat" component={ChatScreen} options={{ title: 'Chat', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE }}/>
+            </ChatStack.Navigator>
+        )
+    }
+
     const SearchStackNavigator = () => {
         const SearchStack = createNativeStackNavigator(); // Usa createNativeStackNavigator fornito da @react-navigation/native-stack
 
@@ -74,32 +87,32 @@ export default function App() {
         )
     }
 
+    const Nav = createBottomTabNavigator();
+
     return (
         <>
             { loading ? <ActivityIndicator /> :
                 session ?
                     <UserContext.Provider value={ session }>
-                        <NavigationContainer theme={ Theme }>
-                            <Nav.Navigator initialRouteName="HomeStack" screenOptions={({route }) => ({
-                                tabBarIcon: ({focused, color, size}) => <Icon
-                                    name={NAVIGATION_ICONS[route.name][focused ? 'normal' : 'outline']}
-                                    size={size}
-                                    color={color}/>,
-                                tabBarShowLabel: false,
-                                headerShadowVisible: false,
-                                tabBarActiveTintColor: 'var(--primary-color)',
-                                tabBarInactiveTintColor: 'var(--text-color)',
-                            })}>
-                                {/*@ts-ignore*/}
-                                <Nav.Screen name="HomeStack" component={HomeStackNavigator} options={{headerShown: false}}/>
-                                {/*@ts-ignore*/}
-                                <Nav.Screen name="SearchStack" component={SearchStackNavigator} options={{headerShown: false}}/>
-                                {/*@ts-ignore*/}
-                                <Nav.Screen name="ChatsStack" component={ChatsScreen} options={{headerShown: false}}/>
-                                {/*@ts-ignore*/}
-                                <Nav.Screen name="ProfileStack" component={ProfileScreen} options={{headerShown: false}}/>
-                            </Nav.Navigator>
-                        </NavigationContainer>
+                        <PubNubProvider client={ChatService.initClient(session.username)} >
+                            <NavigationContainer theme={ Theme }>
+                                <Nav.Navigator initialRouteName="HomeStack" screenOptions={({route }) => ({
+                                    tabBarIcon: ({focused, color, size}) => <Icon
+                                        name={NAVIGATION_ICONS[route.name][focused ? 'normal' : 'outline']}
+                                        size={size}
+                                        color={color}/>,
+                                    tabBarShowLabel: false,
+                                    headerShadowVisible: false,
+                                    tabBarActiveTintColor: 'var(--primary-color)',
+                                    tabBarInactiveTintColor: 'var(--text-color)',
+                                })}>
+                                    <Nav.Screen name="HomeStack" component={HomeStackNavigator} options={{headerShown: false}}/>
+                                    <Nav.Screen name="SearchStack" component={SearchStackNavigator} options={{headerShown: false}}/>
+                                    <Nav.Screen name="ChatsStack" component={ChatStackNavigator} options={{headerShown: false}}/>
+                                    <Nav.Screen name="ProfileStack" component={ProfileScreen} options={{headerShown: false}}/>
+                                </Nav.Navigator>
+                            </NavigationContainer>
+                        </PubNubProvider>
                     </UserContext.Provider>
                     :
                     <LoginScreen />
