@@ -43,7 +43,7 @@ export default function ChatScreen({navigation, route}) {
                     setMessages(history);
                 }
             } catch (error) {
-                console.log('Errore durante la sottoscrizione al channel:', error);
+                console.log('There was an error trying to subscribe to channel:', error);
             }
         };
 
@@ -83,12 +83,12 @@ export default function ChatScreen({navigation, route}) {
     return (
         <View style={CHAT_SCREEN_STYLES.container}>
             <ScrollView
+                // @ts-ignore
                 ref={scrollViewRef}
                 style={SCREEN_VIEW_STYLE}
                 contentContainerStyle={CHAT_SCREEN_STYLES.chatContainer}
                 onContentSizeChange={() => {
-                  scrollViewRef.current?.scrollToEnd({ animated: true });
-                }} >
+                  scrollViewRef.current?.scrollToEnd({ animated: true })}} >
                 {messages.map((message: ChatMessage) =>
                     <MessageBubble
                         key={message.timetoken}
