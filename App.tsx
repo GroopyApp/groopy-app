@@ -67,7 +67,7 @@ export default function App() {
         return (
             <ChatStack.Navigator>
                 {/*@ts-ignore*/}
-                <ChatStack.Screen name="Chats" component={ChatsScreen} options={{ title: 'Conversations', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE }}/>
+                <ChatStack.Screen name="Chats" component={ChatsScreen} options={{ title: 'Conversations', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE, headerLeft: null }}/>
                 {/*@ts-ignore*/}
                 <ChatStack.Screen name="Chat" component={ChatScreen} options={{ title: 'Chat', headerTitleStyle: DEFAULT_SCREEN_TITLE_STYLE }}/>
             </ChatStack.Navigator>

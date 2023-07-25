@@ -63,7 +63,7 @@ export default function ChatScreen({navigation, route}) {
                     <HeaderBackButton
                         {...props}
                         onPress={() => {
-                            navigation.goBack();
+                            navigation.replace('Chats');
                         }}
                     />
                 )
