@@ -20,9 +20,10 @@ export const NAVIGATION_ICONS = {
 }
 
 export const GATEWAY_CONFIG = {
-    host: 'http://159.223.250.132/v1',
+    host: 'http://68.183.125.135/v1',
     authEndpoint: '/auth',
     requestEndpoint: '/request',
+    chatEndpoint: '/chat'
 }
 
 export const PUBNUB_CONFIG = {
