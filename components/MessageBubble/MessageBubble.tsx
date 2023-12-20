@@ -21,7 +21,7 @@ const MessageBubble = ({ message, senderName, senderImage, isUserMessage }) => {
     const backgroundColor = isUserMessage ? "#DCF8C6" : "#e5e5ea";
 
     return (
-        <View style={[{flexDirection: isUserMessage ? "row" : "row-reverse"}, MESSAGE_BUBBLE_STYLES.container]}>
+        <View style={[{flexDirection: isUserMessage ? "row-reverse" : "row"}, MESSAGE_BUBBLE_STYLES.container]}>
             <View style={[MESSAGE_BUBBLE_STYLES.senderInfo, isUserMessage ? {marginRight: 8} : {marginLeft: 8}]}>
                 <View style={MESSAGE_BUBBLE_STYLES.senderImage}>
                     <View
